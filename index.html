@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>模拟连接页面</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #f0f0f0;
+    }
+
+    .status {
+      font-size: 22px;
+      margin: 20px;
+    }
+
+    .ok { color: green; }
+    .fail { color: red; }
+    .loading { color: orange; }
+
+    button {
+      font-size: 16px;
+      padding: 10px 25px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #connectBluetooth {
+      background-color: #28a745;
+      color: white;
+    }
+
+    #connectAI {
+      background-color: #007BFF;
+      color: white;
+    }
+
+    button:disabled {
+      background-color: #888;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 蓝牙状态 -->
+  <div class="status fail" id="btStatus">蓝牙状态：❌ 未连接</div>
+  <button id="connectBluetooth">连接蓝牙设备</button>
+
+  <hr style="width: 60%; margin: 40px auto;">
+
+  <!-- AI状态 -->
+  <div class="status fail" id="aiStatus">AI 状态：❌ 未连接</div>
+  <button id="connectAI">连接 AI</button>
+
+  <script>
+    const btStatus = document.getElementById("btStatus");
+    const aiStatus = document.getElementById("aiStatus");
+    const connectAI = document.getElementById("connectAI");
+    const connectBluetooth = document.getElementById("connectBluetooth");
+
+    // 模拟蓝牙连接
+    connectBluetooth.addEventListener("click", () => {
+      btStatus.textContent = "蓝牙状态：✅ 已连接";
+      btStatus.className = "status ok";
+    });
+
+    // 模拟AI连接
+    connectAI.addEventListener("click", () => {
+      aiStatus.textContent = "AI 状态：⏳ 正在连接...";
+      aiStatus.className = "status loading";
+      connectAI.disabled = true;
+
+      setTimeout(() => {
+        aiStatus.textContent = "AI 状态：✅ 已连接";
+        aiStatus.className = "status ok";
+        connectAI.disabled = false;
+      }, 3000);
+    });
+  </script>
+
+</body>
+</html>
